@@ -1,6 +1,8 @@
 #
 pybind11/*
 
+*.swp
+
 # Prerequisites
 *.d
 

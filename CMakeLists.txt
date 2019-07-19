@@ -47,7 +47,8 @@ find_package(pybind11 )
     set(BUILD_PYBINDINGS OFF CACHE BOOL "build pybindings" FORCE)
   else()
     message(STATUS "-- found pybind11, building pybindings.")
-    pybind11_add_module(${pybindings} MODULE python/pycputools.cxx)
+   
+    add_library(${pybindings} MODULE python/pycputools.cxx)
     target_include_directories(${pybindings}
                                PRIVATE
                                     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -55,9 +56,22 @@ find_package(pybind11 )
                               )
 
     target_link_libraries(${pybindings}
-                          PRIVATE
-                            ${CPUTOOLS_LIBRARY_SHARED}
-                          )
+                             PRIVATE
+                          pybind11::module
+                          ${CPUTOOLS_LIBRARY_SHARED}  )
+    set_target_properties(${pybindings} PROPERTIES PREFIX "${PYTHON_MODULE_PREFIX}"
+                                         SUFFIX "${PYTHON_MODULE_EXTENSION}")
+    #pybind11_add_module(${pybindings} MODULE python/pycputools.cxx)
+    target_include_directories(${pybindings}
+                               PRIVATE
+                                    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+                                   $<INSTALL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+                              )
+
+    #target_link_libraries(${pybindings}
+    #                      PRIVATE
+    #                        ${CPUTOOLS_LIBRARY_SHARED}
+    #                      )
 
   endif()
 endif(BUILD_PYBINDINGS)

@@ -4,7 +4,7 @@
 #include <pybind11/functional.h>
 #include <pybind11/chrono.h>
 
-//#include "cpu_tools.h"
+#include "cpu_tools.h"
 
 namespace py = pybind11;
 
