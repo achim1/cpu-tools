@@ -10,10 +10,8 @@ namespace py = pybind11;
 
 PYBIND11_MODULE(pycputools, m) {
     m.doc() = "Pybindings for cpu tools";
-
-    m.def("test", &test);
-    //m.def("get_cpu_temp", &get_cpu_temp, py::return_value_policy::reference);
-    //m.def("get_cpu_clock_speed", &get_cpu_clock_speed, py::return_value_policy::reference);
+    m.def("get_cpu_temp", &get_cpu_temp, py::return_value_policy::reference);
+    m.def("get_cpu_clock_speed", &get_cpu_clock_speed, py::return_value_policy::reference);
 
 }
 

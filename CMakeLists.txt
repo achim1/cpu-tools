@@ -13,7 +13,7 @@ set(CPUTOOLS_LIBRARY_SHARED "cputools")
 set(pybindings "pycputools") 
 
 # build shared library
-add_library(${CPUTOOLS_LIBRARY_SHARED} SHARED src/cpu_tools.c)
+add_library(${CPUTOOLS_LIBRARY_SHARED} SHARED src/cpu_tools.cxx)
 target_include_directories(${CPUTOOLS_LIBRARY_SHARED}
                            PRIVATE
                                 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -25,7 +25,7 @@ set(BINARIES
 )
 
 foreach(source ${BINARIES})
-    add_executable(${source} src/${source}.c)
+    add_executable(${source} src/${source}.cxx)
     target_include_directories(${source}
                                PRIVATE
                                    $<INSTALL_INTERFACE:include>

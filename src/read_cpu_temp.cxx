@@ -1,7 +1,8 @@
 #include "cpu_tools.h"
 
-void main ()
+int main ()
 {
     get_cpu_temp();
+    return 0;
 }
 

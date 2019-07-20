@@ -8,7 +8,7 @@
 /proc/cpuinfo. On a multiprocessor machine, returns the speed of
 the first CPU. On error returns zero. */
 
-float get_cpu_clock_speed (){
+std::vector<float> get_cpu_clock_speed (){
     // get the number of cores    
     int ncpu = get_nprocs_conf();
     printf("We found %d cores\n", ncpu);
@@ -20,7 +20,8 @@ float get_cpu_clock_speed (){
     char buffer[100*1024];
     size_t bytes_read;
     char* match = buffer;
-    float clock_speed[64]; // support up to 64 cores
+    std::vector<float> clock_speed(ncpu); // reserve for 64 cores
+    //float clock_speed[64]; // support up to 64 cores
     float single_core_speed = 0;
 
     /* Read the entire contents of /proc/cpuinfo into the buffer. */
@@ -31,7 +32,7 @@ float get_cpu_clock_speed (){
     
     if (bytes_read == 0 || bytes_read == sizeof (buffer)){
       printf("Warning can not read out buffer\n");
-      return 0;
+      return clock_speed;
     }
     /* NUL-terminate the text. */
     buffer[bytes_read] = '\0';
@@ -39,7 +40,7 @@ float get_cpu_clock_speed (){
     if (match == NULL)
     {
         printf("Can not find cpu freq");
-        return 0;
+        return clock_speed;
     }
 
     while (ncpu)
@@ -55,7 +56,7 @@ float get_cpu_clock_speed (){
       // walk through the buffer
       match +=100;
 }
-return *clock_speed;
+return clock_speed;
 }
 
 /***************************************************/
@@ -88,9 +89,3 @@ float get_cpu_temp ()
     return cpuTemp;
 }
     
-void test()
-{
-    printf ("Greetings Earthlings!\n");
-
-}
-

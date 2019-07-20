@@ -1,10 +1,10 @@
 #ifndef CPUTOOLS_H_INCLUDED
 #define CPUTOOLS_H_INCLUDED
 
-float get_cpu_temp();
-float get_cpu_clock_speed ();
+#include <vector>
 
-void test();
+float get_cpu_temp();
+std::vector<float> get_cpu_clock_speed ();
 
 #endif
 
