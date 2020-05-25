@@ -1,0 +1,6 @@
+[Unit]
+Description=Control the Kraken liquid cooler
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/watercool.py
