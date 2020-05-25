@@ -70,6 +70,8 @@ float get_cpu_temp ()
     char* match = buffer;
     /* Read the entire contents of /proc/cpuinfo into the buffer. */
     fp = fopen ("/sys/class/hwmon/hwmon0/temp1_input", "r");
+    if (!fp)
+        {fp = fopen ("/sys/class/hwmon/hwmon1/temp1_input", "r");}
     bytes_read = fread (buffer, 1, sizeof (buffer), fp);
     fclose (fp);
     /* Bail if read failed or if buffer isn’t big enough. */
@@ -85,7 +87,7 @@ float get_cpu_temp ()
     float cpuTemp;
     sscanf (match, "%d", &cpuTempRaw);
     cpuTemp = (float)cpuTempRaw/1000;  
-    printf ("CPU temp: %4.0f C\n",cpuTemp);
+    //printf ("CPU temp: %4.0f C\n",cpuTemp);
     return cpuTemp;
 }
     
