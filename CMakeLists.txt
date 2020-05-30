@@ -3,9 +3,7 @@ project(cpu-tools C CXX)
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 set(PYBIND11_PYTHON_VERSION 3.7)
-set(PYTHON_EXECUTABLE /usr/bin/python3.7)
-set(PYTHON_INCLUDE_DIRS "/usr/include/python3.7")
-set(PYTHON_LIBRARIES "/usr/lib/python3.7/config-3.7m-x86_64-linux-gnu/libpython3.7.so")
+find_package (Python COMPONENTS Interpreter Development)
 
 option(BUILD_PYBINDINGS "build pybindings" ON)
 
